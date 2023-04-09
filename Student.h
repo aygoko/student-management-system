@@ -20,10 +20,11 @@ private:
     std::string gender;
     std::vector <Course> enrolledCourses;
     std::map <Course, Grade> grades;
+    std::string getGroup();
 
 public:
     Student(int studentId, std::string firstName, std::string lastName, std::string email, std::string phoneNumber,
-            std::string address, Date dateOfBirth, std::string gender);
+            std::string address, Date dateOfBirth, std::string gender, std::string group);
 
     void addEnrolledCourse(const Course &course);
 

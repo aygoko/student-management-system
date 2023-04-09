@@ -4,7 +4,7 @@
 Student::Student(int studentId, std::string firstName, std::string lastName, std::string email, std::string phoneNumber,
                  std::string address, Date dateOfBirth, std::string gender)
         : studentId(studentId), firstName(firstName), lastName(lastName), email(email), phoneNumber(phoneNumber),
-          address(address), dateOfBirth(dateOfBirth), gender(gender) {}
+          address(address), dateOfBirth(dateOfBirth), gender(gender) , group(group) {}
 
 void Student::addEnrolledCourse(const Course &course) {
     enrolledCourses.push_back(course);
@@ -69,6 +69,11 @@ Date Student::getDateOfBirth() {
 std::string Student::getGender() {
     return gender;
 }
+
+std::string Student::getGroup() {
+    return group;
+}
+
 
 std::vector <Course> Student::getEnrolledCourses() {
     return enrolledCourses;
