@@ -1,4 +1,4 @@
-#include "Student.h"
+#include "Headers/include/Student.h"
 
 
 Student::Student() : studentID(0), firstName(""), middleName(""), lastName(""), email(""), phoneNumber(""), address(""),

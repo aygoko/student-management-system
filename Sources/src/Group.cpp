@@ -1,10 +1,10 @@
-#include "Grade.h"
-
+#include "Headers/include/Grade.h"
 
 
 Grade::Grade() : gradeID(0), studentID(0), lessonID(0), grade(0) {}
 
-Grade::Grade(int gradeID, int studentID, int lessonID, int grade) : gradeID(gradeID), studentID(studentID), lessonID(lessonID), grade(grade) {}
+Grade::Grade(int gradeID, int studentID, int lessonID, int grade) : gradeID(gradeID), studentID(studentID),
+                                                                    lessonID(lessonID), grade(grade) {}
 
 
 void Grade::setGradeID(int id) {

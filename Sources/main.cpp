@@ -1,10 +1,10 @@
 #include <iostream>
-#include "Teacher.h"
-#include "Student.h"
-#include "Faculty.h"
-#include "Group.h"
-#include "Grade.h"
-#include "Lesson.h"
+#include "Headers/include/Teacher.h"
+#include "Headers/include/Student.h"
+#include "Headers/include/Faculty.h"
+#include "Headers/include/Group.h"
+#include "Headers/include/Grade.h"
+#include "Headers/include/Lesson.h"
 #include <limits>
 #include <unordered_map>
 #include <iomanip>

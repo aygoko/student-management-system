@@ -3,7 +3,7 @@
 
 #include <string>
 #include <unordered_map>
-#include "group.h"
+#include "Group.h"
 
 class Faculty {
 private:

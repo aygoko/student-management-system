@@ -1,4 +1,4 @@
-#include "Lesson.h"
+#include "Headers/include/Lesson.h"
 
 
 Lesson::Lesson() : lessonID(0) {}
