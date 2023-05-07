@@ -1,90 +1,94 @@
 #include "Student.h"
 
 
-Student::Student(int studentId, std::string firstName, std::string lastName, std::string email, std::string phoneNumber,
-                 std::string address, Date dateOfBirth, std::string gender)
-        : studentId(studentId), firstName(firstName), lastName(lastName), email(email), phoneNumber(phoneNumber),
-          address(address), dateOfBirth(dateOfBirth), gender(gender) , group(group) {}
+Student::Student() : studentID(0), firstName(""), middleName(""), lastName(""), email(""), phoneNumber(""), address(""),
+                     groupID(0), facultyID(0), courseNumber(0) {}
 
-void Student::addEnrolledCourse(const Course &course) {
-    enrolledCourses.push_back(course);
+
+Student::Student(int studentID, const std::string &firstName, const std::string &middleName,
+                 const std::string &lastName, const std::string &email, const std::string &phoneNumber,
+                 const std::string &address, int groupID, int facultyID, int courseNumber) :
+        studentID(studentID), firstName(firstName), middleName(middleName),
+        lastName(lastName), email(email), phoneNumber(phoneNumber),
+        address(address), groupID(groupID), facultyID(facultyID), courseNumber(courseNumber) {}
+
+
+void Student::setStudentID(int id) {
+    studentID = id;
 }
 
-void Student::dropEnrolledCourse(const Course &course) {
-    for (auto it = enrolledCourses.begin(); it != enrolledCourses.end(); ++it) {
-        if (*it == course) {
-            enrolledCourses.erase(it);
-            break;
-        }
-    }
+int Student::getStudentID() const {
+    return studentID;
 }
 
-void Student::addGrade(const Course &course, Grade grade) {
-    grades[course] = grade;
+void Student::setFirstName(const std::string &fName) {
+    firstName = fName;
 }
 
-void Student::updateGrade(const Course &course, Grade grade) {
-    grades[course] = grade;
+const std::string &Student::getFirstName() const {
+    return firstName;
 }
 
-void Student::removeGrade(const Course &course) {
-    grades.erase(course);
+void Student::setMiddleName(const std::string &mName) {
+    middleName = mName;
 }
 
-float Student::calculateGPA() {
-    float totalCredits = 0.0;
-    float totalPoints = 0.0;
-
-    for (auto it = grades.begin(); it != grades.end(); ++it) {
-        float gradePoints = it->second.getGradePoints();
-        int credits = it->first.getCredits();
-        totalPoints += gradePoints * credits;
-        totalCredits += credits;
-    }
-
-    return totalPoints / totalCredits;
+const std::string &Student::getMiddleName() const {
+    return middleName;
 }
 
-
-std::string Student::getFullName() {
-    return firstName + " " + lastName;
+void Student::setLastName(const std::string &lName) {
+    lastName = lName;
 }
 
-std::string Student::getEmail() {
+const std::string &Student::getLastName() const {
+    return lastName;
+}
+
+void Student::setEmail(const std::string &email) {
+    this->email = email;
+}
+
+const std::string &Student::getEmail() const {
     return email;
 }
 
-std::string Student::getPhoneNumber() {
+void Student::setPhoneNumber(const std::string &phone) {
+    phoneNumber = phone;
+}
+
+const std::string &Student::getPhoneNumber() const {
     return phoneNumber;
 }
 
-std::string Student::getAddress() {
+void Student::setAddress(const std::string &address) {
+    this->address = address;
+}
+
+const std::string &Student::getAddress() const {
     return address;
 }
 
-Date Student::getDateOfBirth() {
-    return dateOfBirth;
+void Student::setGroupID(int groupID) {
+    this->groupID = groupID;
 }
 
-std::string Student::getGender() {
-    return gender;
+int Student::getGroupID() const {
+    return groupID;
 }
 
-std::string Student::getGroup() {
-    return group;
+void Student::setFacultyID(int facultyID) {
+    this->facultyID = facultyID;
 }
 
-
-std::vector <Course> Student::getEnrolledCourses() {
-    return enrolledCourses;
+int Student::getFacultyID() const {
+    return facultyID;
 }
 
-std::map <Course, Grade> Student::getGrades() {
-    return grades;
+void Student::setCourseNumber(int courseNumber) {
+    this->courseNumber = courseNumber;
 }
 
-int Student::getStudentId() {
-    return studentId;
+int Student::getCourseNumber() const {
+    return courseNumber;
 }
-
-

@@ -1,20 +1,37 @@
-//
-// Created by igork on 09/04/2023.
-//
-
-#ifndef COURSEWORK_GRADE_H
-#define COURSEWORK_GRADE_H
+#ifndef GRADE_H
+#define GRADE_H
 
 
 class Grade {
-public:
-    Grade(int gradeValue);
-
-    int getValue() const;
-
 private:
-    int value;
+    int gradeID;
+    int studentID;
+    int lessonID;
+    int grade;
+
+public:
+
+    Grade();
+
+    Grade(int gradeID, int studentID, int lessonID, int grade);
+
+
+    void setGradeID(int id);
+
+    int getGradeID() const;
+
+    void setStudentID(int studentID);
+
+    int getStudentID() const;
+
+    void setLessonID(int lessonID);
+
+    int getLessonID() const;
+
+    void setGrade(int grade);
+
+    int getGrade() const;
 };
 
 
-#endif //COURSEWORK_GRADE_H
+#endif // GRADE_H

@@ -1,61 +1,71 @@
-#ifndef COURSEWORK_STUDENT_H
-#define COURSEWORK_STUDENT_H
+#ifndef STUDENT_H
+#define STUDENT_H
+
 
 #include <string>
-#include <vector>
-#include <map>
-#include "Course.h"
-#include "Date.h"
-#include "Grade.h"
 
 class Student {
 private:
-    int studentId;
+    int studentID;
     std::string firstName;
+    std::string middleName;
     std::string lastName;
     std::string email;
     std::string phoneNumber;
     std::string address;
-    Date dateOfBirth;
-    std::string gender;
-    std::vector <Course> enrolledCourses;
-    std::map <Course, Grade> grades;
-    std::string getGroup();
+    int groupID;
+    int facultyID;
+    int courseNumber;
 
 public:
-    Student(int studentId, std::string firstName, std::string lastName, std::string email, std::string phoneNumber,
-            std::string address, Date dateOfBirth, std::string gender, std::string group);
+    // Constructors
+    Student();
 
-    void addEnrolledCourse(const Course &course);
+    Student(int studentID, const std::string &firstName, const std::string &middleName,
+            const std::string &lastName, const std::string &email, const std::string &phoneNumber,
+            const std::string &address, int groupID, int facultyID, int courseNumber);
 
-    void dropEnrolledCourse(const Course &course);
+    // Getters and Setters
+    void setStudentID(int id);
 
-    void addGrade(const Course &course, Grade grade);
+    int getStudentID() const;
 
-    void updateGrade(const Course &course, Grade grade);
+    void setFirstName(const std::string &fName);
 
-    void removeGrade(const Course &course);
+    const std::string &getFirstName() const;
 
-    float calculateGPA();
+    void setMiddleName(const std::string &mName);
 
-    std::string getFullName();
+    const std::string &getMiddleName() const;
 
-    std::string getEmail();
+    void setLastName(const std::string &lName);
 
-    std::string getPhoneNumber();
+    const std::string &getLastName() const;
 
-    std::string getAddress();
+    void setEmail(const std::string &email);
 
-    Date getDateOfBirth();
+    const std::string &getEmail() const;
 
-    std::string getGender();
+    void setPhoneNumber(const std::string &phone);
 
-    std::vector <Course> getEnrolledCourses();
+    const std::string &getPhoneNumber() const;
 
-    std::map <Course, Grade> getGrades();
+    void setAddress(const std::string &address);
 
-    int getStudentId();
+    const std::string &getAddress() const;
+
+    void setGroupID(int groupID);
+
+    int getGroupID() const;
+
+    void setFacultyID(int facultyID);
+
+    int getFacultyID() const;
+
+    void setCourseNumber(int courseNumber);
+
+    int getCourseNumber() const;
 };
 
 
-#endif
+#endif // STUDENT_H
