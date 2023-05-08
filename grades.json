@@ -1,0 +1,50 @@
+[
+    {
+        "grade": 4,
+        "id": 6,
+        "lesson_id": 2,
+        "student_id": 3
+    },
+    {
+        "grade": 5,
+        "id": 5,
+        "lesson_id": 1,
+        "student_id": 3
+    },
+    {
+        "grade": 4,
+        "id": 7,
+        "lesson_id": 1,
+        "student_id": 4
+    },
+    {
+        "grade": 4,
+        "id": 8,
+        "lesson_id": 2,
+        "student_id": 4
+    },
+    {
+        "grade": 5,
+        "id": 1,
+        "lesson_id": 1,
+        "student_id": 1
+    },
+    {
+        "grade": 3,
+        "id": 2,
+        "lesson_id": 2,
+        "student_id": 1
+    },
+    {
+        "grade": 5,
+        "id": 3,
+        "lesson_id": 1,
+        "student_id": 2
+    },
+    {
+        "grade": 5,
+        "id": 4,
+        "lesson_id": 2,
+        "student_id": 2
+    }
+]

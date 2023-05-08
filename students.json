@@ -1,0 +1,50 @@
+[
+    {
+        "address": "789 Oak Ave, Anytown, USA",
+        "course_number": 2,
+        "email": "michael.johnson@example.com",
+        "faculty_id": 1,
+        "first_name": "Michael",
+        "group_id": 102,
+        "id": 3,
+        "last_name": "Johnson",
+        "middle_name": "C.",
+        "phone_number": "+1 555-9012"
+    },
+    {
+        "address": "321 Elm St, Anytown, USA",
+        "course_number": 2,
+        "email": "emily.williams@example.com",
+        "faculty_id": 1,
+        "first_name": "Emily",
+        "group_id": 102,
+        "id": 4,
+        "last_name": "Williams",
+        "middle_name": "D.",
+        "phone_number": "+1 555-3456"
+    },
+    {
+        "address": "456 High St, Anytown, USA",
+        "course_number": 1,
+        "email": "jane.doe@example.com",
+        "faculty_id": 1,
+        "first_name": "Jane",
+        "group_id": 101,
+        "id": 2,
+        "last_name": "Doe",
+        "middle_name": "B.",
+        "phone_number": "+1 555-5678"
+    },
+    {
+        "address": "123 Main St, Anytown, USA",
+        "course_number": 1,
+        "email": "smith.john@example.com",
+        "faculty_id": 1,
+        "first_name": "John",
+        "group_id": 101,
+        "id": 1,
+        "last_name": "Smith",
+        "middle_name": "A.",
+        "phone_number": "+1 565-1237"
+    }
+]
