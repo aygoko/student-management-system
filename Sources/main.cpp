@@ -8,6 +8,8 @@
 #include <limits>
 #include <unordered_map>
 #include <iomanip>
+#include "json.hpp"
+#include <fstream>
 
 
 void displayMenu() {
@@ -105,10 +107,11 @@ void updateStudentRecord(Student &student) {
     std::string newEmail, newPhoneNumber, newAddress;
     std::cout << "Enter the new email: ";
     std::cin >> newEmail;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),
+                    '\n');
     std::cout << "Enter the new phone number: ";
-    std::cin >> newPhoneNumber;
+    getline(std::cin, newPhoneNumber);
     std::cout << "Enter the new address: ";
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     getline(std::cin, newAddress);
 
     student.setEmail(newEmail);
@@ -211,10 +214,126 @@ std::unordered_map<int, Grade> initGrades() {
     };
 }
 
+void saveStudents(const std::unordered_map<int, Student> &students, const std::string &filename) {
+    nlohmann::json jsonStudents;
+
+    for (const auto &[id, student]: students) {
+        nlohmann::json jsonStudent;
+        jsonStudent["id"] = student.getStudentID();
+        jsonStudent["first_name"] = student.getFirstName();
+        jsonStudent["middle_name"] = student.getMiddleName();
+        jsonStudent["last_name"] = student.getLastName();
+        jsonStudent["email"] = student.getEmail();
+        jsonStudent["phone_number"] = student.getPhoneNumber();
+        jsonStudent["address"] = student.getAddress();
+        jsonStudent["group_id"] = student.getGroupID();
+        jsonStudent["faculty_id"] = student.getFacultyID();
+        jsonStudent["course_number"] = student.getCourseNumber();
+
+        jsonStudents.push_back(jsonStudent);
+    }
+
+    std::ofstream file(filename);
+    if (file.is_open()) {
+        file << jsonStudents.dump(4);
+        file.close();
+    }
+}
+
+std::unordered_map<int, Student> loadStudents(const std::string &filename) {
+    std::unordered_map<int, Student> students;
+    nlohmann::json jsonData;
+
+    try {
+        std::ifstream file(filename);
+        if (file.is_open()) {
+            file >> jsonData;
+            file.close();
+        } else {
+            return students;
+        }
+
+        for (const auto &jsonStudent: jsonData) {
+            int id = jsonStudent["id"];
+            std::string first_name = jsonStudent["first_name"];
+            std::string middle_name = jsonStudent["middle_name"];
+            std::string last_name = jsonStudent["last_name"];
+            std::string email = jsonStudent["email"];
+            std::string phone_number = jsonStudent["phone_number"];
+            std::string address = jsonStudent["address"];
+            int group_id = jsonStudent["group_id"];
+            int faculty_id = jsonStudent["faculty_id"];
+            int course_number = jsonStudent["course_number"];
+
+            students[id] = Student(id, first_name, middle_name, last_name, email, phone_number, address, group_id,
+                                   faculty_id, course_number);
+        }
+
+    } catch (const std::exception &e) {
+        std::cerr << "Error while parsing JSON data: " << e.what() << std::endl;
+    }
+
+    return students;
+}
+
+
+void saveGrades(const std::unordered_map<int, Grade> &grades, const std::string &filename) {
+    nlohmann::json jsonGrades;
+
+    for (const auto &[id, grade]: grades) {
+        nlohmann::json jsonGrade;
+        jsonGrade["id"] = grade.getGradeID();
+        jsonGrade["student_id"] = grade.getStudentID();
+        jsonGrade["lesson_id"] = grade.getLessonID();
+        jsonGrade["grade"] = grade.getGrade();
+
+        jsonGrades.push_back(jsonGrade);
+    }
+
+    std::ofstream file(filename);
+    if (file.is_open()) {
+        file << jsonGrades.dump(4);
+        file.close();
+    }
+}
+
+std::unordered_map<int, Grade> loadGrades(const std::string &filename) {
+    std::unordered_map<int, Grade> grades;
+    nlohmann::json jsonData;
+
+    try {
+        std::ifstream file(filename);
+        if (file.is_open()) {
+            file >> jsonData;
+            file.close();
+        } else {
+            return grades;
+        }
+
+        for (const auto &jsonGrade: jsonData) {
+            int id = jsonGrade["id"];
+            int student_id = jsonGrade["student_id"];
+            int lesson_id = jsonGrade["lesson_id"];
+            int grade = jsonGrade["grade"];
+
+            grades[id] = Grade(id, student_id, lesson_id, grade);
+        }
+
+    } catch (const std::exception &e) {
+        std::cerr << "Error while parsing JSON data: " << e.what() << std::endl;
+    }
+
+    return grades;
+}
+
 
 int main() {
     try {
-        std::unordered_map<int, Student> students = initStudents();
+        std::unordered_map<int, Student> students = loadStudents("students.json");
+        if (students.empty()) {
+            students = initStudents();
+        }
+
 
         std::unordered_map<int, Group> groups = initGroups();
 
@@ -222,7 +341,10 @@ int main() {
 
         std::unordered_map<int, Lesson> lessons = initLessons();
 
-        std::unordered_map<int, Grade> grades = initGrades();
+        std::unordered_map<int, Grade> grades = loadGrades("grades.json");
+        if (grades.empty()) {
+            grades = initGrades();
+        }
 
         Teacher teacher(1, "Alice", "E.", "Brown", "alice.brown@example.com", "+1 555-7890", "teacher1", "password123");
 
@@ -257,6 +379,7 @@ int main() {
                         std::cin >> updateRecord;
                         if (updateRecord == 'y' || updateRecord == 'Y') {
                             updateStudentRecord(students[studentIndex]);
+                            saveStudents(students, "students.json");
                         }
                     } else {
                         std::cout << "Student not found." << std::endl;
@@ -287,7 +410,8 @@ int main() {
                             std::cout << "Enter the new grade: ";
                             std::cin >> newGrade;
                             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                            updateGrade(grades, studentID, lessonID, newGrade);
+                            updateGrade(students, grades, studentID, groupID, lessonID, newGrade);
+                            saveGrades(grades, "grades.json");
                         }
                     } else {
                         std::cout << "Group not found." << std::endl;
@@ -313,4 +437,6 @@ int main() {
     }
     return 0;
 }
+
+
 
