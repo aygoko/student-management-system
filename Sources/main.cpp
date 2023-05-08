@@ -108,7 +108,7 @@ void updateStudentRecord(Student &student) {
     std::cout << "Enter the new phone number: ";
     std::cin >> newPhoneNumber;
     std::cout << "Enter the new address: ";
-    std::cin.ignore();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     getline(std::cin, newAddress);
 
     student.setEmail(newEmail);
