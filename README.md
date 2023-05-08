@@ -7,23 +7,25 @@ This program is implemented using various classes and functions to handle the da
 ## Prerequisites
 
 - A C++ compiler with support for C++23 (e.g., GCC, Clang, or Visual Studio)
+- This application requires a C++ compiler with support for C++17 and the [nlohmann/json](https://github.com/nlohmann/json) library
 
 ## How to Compile and Run
 
 ### Using CMake
 
 1. Clone or download the repository.
-2. Create a build directory in the project root:
+2. Ensure that the nlohmann/json library is installed and included in your compiler's search path.
+3. Create a build directory in the project root:
 
    `mkdir build`
 
    `cd build`
-3. Run CMake and compile the project:
+4. Run CMake and compile the project:
    ```bash 
    cmake ..
    cmake --build .
    ```
-4. Run the generated executable file (named `your_project_name` or `your_project_name.exe` on Windows):
+5. Run the generated executable file (named `your_project_name` or `your_project_name.exe` on Windows):
 
 `./your_project_name`
 ## Example Commands
@@ -84,5 +86,8 @@ student_management_system /
     │       ├── Group.cpp
     │       ├── Grade.cpp
     │       └── Lesson.cpp
-    └── CMakeLists.txt
+    └── CMakeLists.txt     
+    └── students.json       
+    └── grades.json
+   
 ```
