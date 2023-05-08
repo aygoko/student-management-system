@@ -119,20 +119,26 @@ void updateStudentRecord(Student &student) {
 }
 
 
-void updateGrade(std::unordered_map<int, Grade> &grades, int studentID, int lessonID, int newGrade) {
+void updateGrade(const std::unordered_map<int, Student> &students,
+                 std::unordered_map<int, Grade> &grades,
+                 int studentID, int groupID, int lessonID, int newGrade) {
     bool gradeUpdated = false;
-    for (auto &[id, grade]: grades) {
-        if (grade.getStudentID() == studentID && grade.getLessonID() == lessonID) {
-            grade.setGrade(newGrade);
-            gradeUpdated = true;
-            break;
+
+    auto studentIter = students.find(studentID);
+    if (studentIter != students.end() && studentIter->second.getGroupID() == groupID) {
+        for (auto &[id, grade]: grades) {
+            if (grade.getStudentID() == studentID && grade.getLessonID() == lessonID) {
+                grade.setGrade(newGrade);
+                gradeUpdated = true;
+                break;
+            }
         }
     }
 
     if (gradeUpdated) {
         std::cout << "Grade has been updated successfully." << std::endl;
     } else {
-        std::cout << "Grade not found." << std::endl;
+        std::cout << "Grade not found or student not in the specified group." << std::endl;
     }
 }
 
